@@ -1,4 +1,4 @@
-package com.example;
+package com.skillroller;
 
 import com.google.inject.Provides;
 import javax.inject.Inject;
@@ -14,40 +14,28 @@ import net.runelite.client.plugins.PluginDescriptor;
 
 @Slf4j
 @PluginDescriptor(
-	name = "Example"
+	name = "Skill Roller"
 )
-public class ExamplePlugin extends Plugin
+public class SkillRollerPlugin extends Plugin
 {
 	@Inject
 	private Client client;
 
 	@Inject
-	private ExampleConfig config;
-
-	@Override
-	protected void startUp() throws Exception
-	{
-		log.info("Example started!");
-	}
-
-	@Override
-	protected void shutDown() throws Exception
-	{
-		log.info("Example stopped!");
-	}
+	private SkillRollerConfig config;
 
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged gameStateChanged)
 	{
 		if (gameStateChanged.getGameState() == GameState.LOGGED_IN)
 		{
-			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Example says " + config.greeting(), null);
+			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Skill Roller says " + config.greeting(), null);
 		}
 	}
 
 	@Provides
-	ExampleConfig provideConfig(ConfigManager configManager)
+    SkillRollerConfig provideConfig(ConfigManager configManager)
 	{
-		return configManager.getConfig(ExampleConfig.class);
+		return configManager.getConfig(SkillRollerConfig.class);
 	}
 }
